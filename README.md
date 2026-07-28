@@ -1,3 +1,4 @@
+https://github.com/sofakalmykova/weblarek
 # Проектная работа "Веб-ларек"
 
 Стек: HTML, SCSS, TS, Vite
