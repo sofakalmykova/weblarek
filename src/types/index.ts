@@ -43,3 +43,53 @@ export interface IOrderResponse {
   id: string;
   total: number;
 }
+
+export interface IBasket {
+  price: number;
+  list: HTMLElement[];
+  buttonIsActive: boolean;
+}
+
+export type TCard = Pick<IProduct, "title" | "price" | "id">;
+
+export interface ICardByBasket {
+  index: number;
+}
+
+export type TCardByCatalog = Pick<IProduct, "category" | "image"> & {
+  alt: string;
+};
+export type TImageWithAlt = Pick<TCardByCatalog, "image" | "alt">;
+
+export type TCardByModal = Pick<
+  IProduct,
+  "category" | "image" | "description"
+> & {
+  alt: string;
+} & { button: TButtonVariations };
+
+export type TButtonVariations = "buy" | "remove" | "unavailable";
+
+export interface IFormContact {}
+export interface IFormOrder {
+  paymentTypeActive: TPayment;
+}
+export interface IForms {
+  formserrors: string;
+  valid: boolean;
+}
+export interface IGallery {
+  catalog: HTMLElement[];
+}
+export interface IHeader {
+  counter: number;
+}
+
+export interface IModal {
+  content: HTMLElement | HTMLElement[];
+  modalISActive: boolean;
+}
+
+export interface ISuccess {
+  orderPrice: number;
+}

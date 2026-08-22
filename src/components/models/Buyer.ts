@@ -1,21 +1,28 @@
 import { IBuyer, TPayment, IBuyerErrors } from "../../types/index";
+import { IEvents } from "../base/Events";
 export class Buyer {
   private payment: TPayment | null = null;
-  private email: string = '';
-  private phone: string = '';
-  private address: string = '';
+  private email: string = "";
+  private phone: string = "";
+  private address: string = "";
+  constructor(protected events: IEvents) {}
 
   setPayment(payment: TPayment | null): void {
     this.payment = payment;
+    this.events.emit("buyer:set-payment", { payment: this.payment });
+    this.events.emit("buyer:changed");
   }
   setEmail(email: string): void {
     this.email = email;
+    this.events.emit("buyer:changed");
   }
   setPhone(phone: string): void {
     this.phone = phone;
+    this.events.emit("buyer:changed");
   }
   setAddress(address: string): void {
     this.address = address;
+    this.events.emit("buyer:changed");
   }
 
   getBuyer(): IBuyer {
@@ -32,11 +39,12 @@ export class Buyer {
     this.email = "";
     this.phone = "";
     this.address = "";
+    this.events.emit("buyer:changed");
   }
 
   validate(): IBuyerErrors {
     const errors: IBuyerErrors = {};
-    if (!this.payment || this.payment.trim() === "") {
+    if (!this.payment || this.payment === null) {
       errors.payment = "Не выбран способ оплаты";
     }
     if (!this.email || this.email.trim().length === 0) {
