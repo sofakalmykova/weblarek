@@ -4,7 +4,6 @@ import { categoryMap } from "../../utils/constants";
 import { IEvents } from "../base/Events";
 import { TImageWithAlt } from "../../types/index";
 import { TCardByModal } from "../../types/index";
-import { TButtonVariations } from "../../types/index";
 
 export class CardByModal extends Card<TCardByModal> {
   protected cardsCategory: HTMLElement;
@@ -34,11 +33,8 @@ export class CardByModal extends Card<TCardByModal> {
       ".card__button",
       this.container,
     );
-    this.cardsButton.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const currentId = this.cardproductId;
-      this.events.emit("cardbutton: clicked", { id: currentId });
+    this.cardsButton.addEventListener("click", () => {
+      this.events.emit("cardbutton: clicked");
     });
   }
 
@@ -60,16 +56,11 @@ export class CardByModal extends Card<TCardByModal> {
     this.cardsDescription.textContent = value;
   }
 
-  set button(value: TButtonVariations) {
-    if (value === "buy") {
-      this.cardsButton.textContent = "Купить";
-    }
-    if (value === "remove") {
-      this.cardsButton.textContent = "Удалить из корзины";
-    }
-    if (value === "unavailable") {
-      this.cardsButton.textContent = "Недоступно";
-      this.cardsButton.disabled = true;
-    }
+  set buttonText(text: string) {
+    this.cardsButton.textContent = text;
+  }
+
+  set isDisabled(value: boolean) {
+    this.cardsButton.disabled = value;
   }
 }

@@ -5,7 +5,6 @@ import { TCard } from "../../types/index";
 export class Card<T> extends Component<TCard & T> {
   protected cardsTitle: HTMLElement;
   protected cardsPrice: HTMLElement;
-  protected cardproductId: string | null = null;
   constructor(container: HTMLElement) {
     super(container);
     this.cardsTitle = ensureElement<HTMLElement>(
@@ -16,10 +15,6 @@ export class Card<T> extends Component<TCard & T> {
       ".card__price",
       this.container,
     );
-  }
-
-  set id(item: string) {
-    this.cardproductId = item;
   }
 
   set title(value: string) {

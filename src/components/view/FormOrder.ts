@@ -7,6 +7,7 @@ import { IFormOrder } from "../../types/index";
 export class FormOrder extends Forms<IFormOrder> {
   protected buttonCard: HTMLButtonElement;
   protected buttonCash: HTMLButtonElement;
+  protected addressInput: HTMLInputElement;
 
   constructor(events: IEvents, container: HTMLFormElement) {
     super(events, container);
@@ -18,6 +19,8 @@ export class FormOrder extends Forms<IFormOrder> {
       '[name="cash"]',
       this.container,
     );
+
+    this.addressInput = ensureElement<HTMLInputElement>('[name="address"]', this.container);
     this.buttonCard.addEventListener("click", () => {
       this.events.emit("card:ischecked");
     });
@@ -26,7 +29,7 @@ export class FormOrder extends Forms<IFormOrder> {
     });
   }
 
-  set paymentTypeActive(value: TPayment) {
+  set paymentTypeActive(value: TPayment | null) {
     this.buttonCard.classList.remove("button_alt-active");
     this.buttonCash.classList.remove("button_alt-active");
 
@@ -36,5 +39,9 @@ export class FormOrder extends Forms<IFormOrder> {
     if (value === "cash") {
       this.buttonCash.classList.add("button_alt-active");
     }
+  }
+
+  set address(value: string) {
+    this.addressInput.value = value;
   }
 }

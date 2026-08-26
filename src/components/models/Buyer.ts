@@ -9,20 +9,19 @@ export class Buyer {
 
   setPayment(payment: TPayment | null): void {
     this.payment = payment;
-    this.events.emit("buyer:set-payment", { payment: this.payment });
-    this.events.emit("buyer:changed");
+    this.events.emit("buyer:changed", { field: "payment" });
   }
   setEmail(email: string): void {
     this.email = email;
-    this.events.emit("buyer:changed");
+    this.events.emit("buyer:changed", { field: "email" });
   }
   setPhone(phone: string): void {
     this.phone = phone;
-    this.events.emit("buyer:changed");
+    this.events.emit("buyer:changed", { field: "phone" });
   }
   setAddress(address: string): void {
     this.address = address;
-    this.events.emit("buyer:changed");
+    this.events.emit("buyer:changed", { field: "address" });
   }
 
   getBuyer(): IBuyer {

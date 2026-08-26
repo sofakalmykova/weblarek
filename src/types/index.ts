@@ -50,7 +50,7 @@ export interface IBasket {
   buttonIsActive: boolean;
 }
 
-export type TCard = Pick<IProduct, "title" | "price" | "id">;
+export type TCard = Pick<IProduct, "title" | "price">;
 
 export interface ICardByBasket {
   index: number;
@@ -66,13 +66,12 @@ export type TCardByModal = Pick<
   "category" | "image" | "description"
 > & {
   alt: string;
-} & { button: TButtonVariations };
+} & { buttonText: string } & {isDisabled: boolean};
 
-export type TButtonVariations = "buy" | "remove" | "unavailable";
-
-export interface IFormContact {}
+export type TFormContact = Pick<IBuyer, 'email' | 'phone'>
 export interface IFormOrder {
   paymentTypeActive: TPayment;
+  address: string;
 }
 export interface IForms {
   formserrors: string;
@@ -92,4 +91,9 @@ export interface IModal {
 
 export interface ISuccess {
   orderPrice: number;
+}
+
+export interface ICardActions {
+  onClick?: () => void;
+  onDelete?: () => void;
 }

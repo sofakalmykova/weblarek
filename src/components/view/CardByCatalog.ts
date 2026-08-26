@@ -1,16 +1,15 @@
 import { ensureElement } from "../../utils/utils";
 import { Card } from "./Card";
 import { categoryMap } from "../../utils/constants";
-import { IEvents } from "../base/Events";
 import { TCardByCatalog } from "../../types/index";
 import { TImageWithAlt } from "../../types/index";
+import { ICardActions } from "../../types/index";
 
 export class CardByCatalog extends Card<TCardByCatalog> {
   protected cardsCategory: HTMLElement;
   protected cardsImage: HTMLImageElement;
   constructor(
-    protected events: IEvents,
-    container: HTMLElement,
+    container: HTMLElement, actions?: ICardActions
   ) {
     super(container);
 
@@ -22,13 +21,10 @@ export class CardByCatalog extends Card<TCardByCatalog> {
       ".card__image",
       this.container,
     );
-    this.container.addEventListener("click", () => {
-      const currentId = this.cardproductId;
-      if (!currentId) {
-        return;
-      }
-      this.events.emit("card:selected", { id: currentId });
-    });
+
+    if (actions?.onClick) {
+      this.container.addEventListener('click', actions.onClick)
+    }
   }
 
   set image(value: TImageWithAlt) {
