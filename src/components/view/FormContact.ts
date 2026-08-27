@@ -8,8 +8,14 @@ export class FormContact extends Forms<TFormContact> {
   protected inputPhone: HTMLInputElement;
   constructor(events: IEvents, container: HTMLFormElement) {
     super(events, container);
-    this.inputEmail = ensureElement<HTMLInputElement>('[name="email"]', this.container);
-    this.inputPhone = ensureElement<HTMLInputElement>('[name="phone"]', this.container);
+    this.inputEmail = ensureElement<HTMLInputElement>(
+      '[name="email"]',
+      this.container,
+    );
+    this.inputPhone = ensureElement<HTMLInputElement>(
+      '[name="phone"]',
+      this.container,
+    );
   }
 
   set email(value: string) {

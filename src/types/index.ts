@@ -66,13 +66,12 @@ export type TCardByModal = Pick<
   "category" | "image" | "description"
 > & {
   alt: string;
-} & { buttonText: string } & {isDisabled: boolean};
+} & { buttonText: string } & { isDisabled: boolean };
 
-export type TFormContact = Pick<IBuyer, 'email' | 'phone'>
-export interface IFormOrder {
-  paymentTypeActive: TPayment;
-  address: string;
-}
+export type TFormContact = Pick<IBuyer, "email" | "phone">;
+
+export type TFormOrder = Pick<IBuyer, "payment" | "address">;
+
 export interface IForms {
   formserrors: string;
   valid: boolean;
@@ -86,7 +85,6 @@ export interface IHeader {
 
 export interface IModal {
   content: HTMLElement | HTMLElement[];
-  modalISActive: boolean;
 }
 
 export interface ISuccess {

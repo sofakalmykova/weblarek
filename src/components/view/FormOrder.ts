@@ -2,9 +2,9 @@ import { ensureElement } from "../../utils/utils";
 import { IEvents } from "../base/Events";
 import { Forms } from "./Forms";
 import { TPayment } from "../../types/index";
-import { IFormOrder } from "../../types/index";
+import { TFormOrder } from "../../types/index";
 
-export class FormOrder extends Forms<IFormOrder> {
+export class FormOrder extends Forms<TFormOrder> {
   protected buttonCard: HTMLButtonElement;
   protected buttonCash: HTMLButtonElement;
   protected addressInput: HTMLInputElement;
@@ -20,7 +20,10 @@ export class FormOrder extends Forms<IFormOrder> {
       this.container,
     );
 
-    this.addressInput = ensureElement<HTMLInputElement>('[name="address"]', this.container);
+    this.addressInput = ensureElement<HTMLInputElement>(
+      '[name="address"]',
+      this.container,
+    );
     this.buttonCard.addEventListener("click", () => {
       this.events.emit("card:ischecked");
     });
@@ -29,7 +32,7 @@ export class FormOrder extends Forms<IFormOrder> {
     });
   }
 
-  set paymentTypeActive(value: TPayment | null) {
+  set payment(value: TPayment | null) {
     this.buttonCard.classList.remove("button_alt-active");
     this.buttonCash.classList.remove("button_alt-active");
 
